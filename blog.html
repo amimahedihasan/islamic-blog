@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>নিবন্ধের বিবরণ — চিন্তাপ্রবাহ</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-base: #0c0d0e;
+            --bg-surface: #131517;
+            --primary-emerald: #0d6e46;
+            --glow-green: #118756;
+            --text-pure: #ffffff;
+            --text-muted: #94a3b8;
+            --glass-border: rgba(13, 110, 70, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Hind Siliguri', sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--bg-base); color: var(--text-pure); overflow-x: hidden; line-height: 1.95; }
+        .container { max-width: 850px; margin: 0 auto; padding: 0 20px; }
+
+        .fade-up { opacity: 0; transform: translateY(25px); transition: all 0.8s cubic-bezier(0.215, 0.61, 0.355, 1); }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        .cinematic-hero { position: relative; height: 65vh; min-height: 450px; display: flex; align-items: center; justify-content: center; text-align: center; background-position: center !important; background-repeat: no-repeat !important; background-size: cover !important; }
+        .hero-wrapper { position: relative; z-index: 5; padding: 0 20px; max-width: 900px; }
+        .back-nav-link { display: inline-flex; align-items: center; gap: 8px; color: var(--glow-green); text-decoration: none; font-weight: 500; font-size: 14px; margin-bottom: 25px; background: rgba(13, 110, 70, 0.12); padding: 6px 18px; border-radius: 50px; border: 1px solid var(--glass-border); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .back-nav-link:hover { background: var(--primary-emerald); color: var(--text-pure); transform: translateX(-5px); }
+        .hero-wrapper h1 { font-family: 'Noto Serif Bengali', serif; font-size: clamp(26px, 4.5vw, 42px); font-weight: 700; color: var(--text-pure); line-height: 1.35; margin-bottom: 20px; }
+        .hero-wrapper p { font-size: clamp(15px, 2.5vw, 18px); color: var(--text-muted); font-weight: 400; max-width: 750px; margin: 0 auto; }
+
+        .main-content-area { margin-top: -80px; position: relative; z-index: 10; padding-bottom: 60px; }
+        .premium-reading-card { background: rgba(19, 21, 23, 0.82); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-radius: 28px; padding: 50px; box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5); }
+        
+        .article-meta-strip { display: flex; flex-wrap: wrap; gap: 24px; font-size: 14px; color: var(--text-muted); border-bottom: 1px solid rgba(255, 255, 255, 0.04); padding-bottom: 25px; margin-bottom: 35px; }
+        .meta-box-item { display: flex; align-items: center; gap: 8px; }
+        .meta-box-item i { color: var(--glow-green); }
+
+        .spotlight-media-container { width: 100%; border-radius: 16px; overflow: hidden; margin-bottom: 40px; height: 400px; background: #16181a; border: 1px solid rgba(255, 255, 255, 0.02); }
+        .spotlight-media-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.15, 1, 0.3, 1); }
+        .spotlight-media-container:hover img { transform: scale(1.025); }
+
+        .article-body-text { font-family: 'Noto Serif Bengali', serif; font-size: 18px; color: #cbd5e1; text-align: justify; }
+        .article-body-text p { margin-bottom: 25px; }
+
+        .islamic-quote-callout { border-left: 4px solid var(--primary-emerald); background: linear-gradient(90deg, rgba(13, 110, 70, 0.06) 0%, transparent 100%); padding: 30px; border-radius: 0 20px 20px 0; margin: 45px 0; }
+        .quote-icon-mark { font-size: 24px; color: var(--glow-green); display: block; margin-bottom: 10px; }
+        .quote-bengali { font-style: italic; color: #e2e8f0; font-size: 17px; line-height: 1.8; }
+
+        .premium-author-card { background: var(--bg-surface); border: 1px solid rgba(255, 255, 255, 0.02); border-radius: 20px; padding: 35px; margin-top: 60px; display: flex; align-items: center; gap: 30px; }
+        .author-card-avatar { flex-shrink: 0; width: 90px; height: 90px; border-radius: 50%; padding: 3px; border: 2px solid rgba(13, 110, 70, 0.3); }
+        .author-card-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+        .author-card-details h4 { font-family: 'Noto Serif Bengali', serif; font-size: 19px; margin-bottom: 6px; }
+        .author-card-details p { font-size: 14.5px; color: var(--text-muted); margin-bottom: 15px; }
+        .author-social-strip { display: flex; gap: 14px; }
+        .author-social-strip a { color: var(--text-muted); font-size: 15px; transition: all 0.3s ease; }
+        .author-social-strip a:hover { color: var(--glow-green); transform: translateY(-2px); }
+
+        .related-posts-section { padding: 20px 0 60px 0; }
+        .section-headline { font-family: 'Noto Serif Bengali', serif; font-size: 22px; margin-bottom: 30px; display: flex; align-items: center; gap: 12px; }
+        .section-headline::after { content: ''; flex-grow: 1; height: 1px; background: rgba(255, 255, 255, 0.05); }
+        .related-articles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .related-magazine-card { background: var(--bg-surface); border-radius: 16px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.01); transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); text-decoration: none; display: flex; flex-direction: column; }
+        .related-magazine-card:hover { transform: translateY(-6px); border-color: rgba(13, 110, 70, 0.2); }
+        .card-img-container { width: 100%; height: 160px; overflow: hidden; background: #181a1c; }
+        .card-img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+        .related-magazine-card:hover .card-img-container img { transform: scale(1.04); }
+        .card-meta-data { padding: 20px; }
+        .card-meta-data span { font-size: 12px; color: var(--glow-green); font-weight: 500; display: block; margin-bottom: 6px; }
+        .card-meta-data h5 { font-family: 'Noto Serif Bengali', serif; font-size: 15.5px; color: #fff; line-height: 1.4; }
+
+        .luxury-minimal-footer { border-top: 1px solid rgba(255, 255, 255, 0.02); background-color: #08090a; padding: 40px; text-align: center; font-size: 13px; color: #475569; }
+
+        @media (max-width: 768px) { .premium-reading-card { padding: 25px; border-radius: 20px; } .premium-author-card { flex-direction: column; text-align: center; } .spotlight-media-container { height: 250px; } }
+    </style>
+</head>
+<body>
+
+    <section class="cinematic-hero" id="detail-hero">
+        <div class="hero-wrapper">
+            <a href="portfolio.html" class="back-nav-link">
+                <i class="fa-solid fa-arrow-left"></i> পোর্টফোলিও হাব
+            </a>
+            <h1 id="detail-title">নিবন্ধ লোড হচ্ছে...</h1>
+            <p id="detail-subtitle">...</p>
+        </div>
+    </section>
+
+    <main class="main-content-area">
+        <div class="container">
+            <article class="premium-reading-card fade-up">
+                
+                <div class="article-meta-strip">
+                    <div class="meta-box-item"><i class="fa-solid fa-user"></i> <span id="detail-author">...</span></div>
+                    <div class="meta-box-item"><i class="fa-solid fa-calendar-days"></i> <span id="detail-date">...</span></div>
+                    <div class="meta-box-item"><i class="fa-solid fa-clock"></i> <span id="detail-time">...</span></div>
+                </div>
+
+                <div class="spotlight-media-container">
+                    <img id="main-featured-img" src="" alt="Spotlight Frame">
+                </div>
+
+                <div id="detail-body" class="article-body-text"></div>
+
+                <div class="islamic-quote-callout" id="quote-box">
+                    <i class="fa-solid fa-quote-left quote-icon-mark"></i>
+                    <p class="quote-bengali" id="quote-callout-text">...</p>
+                </div>
+
+                <div class="premium-author-card">
+                    <div class="author-card-avatar">
+                        <img id="author-avatar" src="" alt="Author Identity Picture">
+                    </div>
+                    <div class="author-card-details">
+                        <h4 id="author-name">...</h4>
+                        <p id="author-bio">...</p>
+                        <div class="author-social-strip">
+                            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </article>
+        </div>
+    </main>
+
+    <section class="related-posts-section">
+        <div class="container">
+            <h4 class="section-headline">আরও কিছু নির্বাচিত আর্টিকেল</h4>
+            <div class="related-articles-grid" id="detail-related-grid"></div>
+        </div>
+    </section>
+
+    <footer class="luxury-minimal-footer">
+        <p>© 2026 All Rights Reserved — চিন্তাপ্রবাহ | Developed by Md. Mahedi Hassan</p>
+    </footer>
+
+    <script src="script1.js"></script>
+</body>
+</html>
